@@ -1,6 +1,12 @@
+function Sort(commonTimeForProjects){
+
+}
+
 function FinalTable({ data }) {
     const projectEmployees = Object.groupBy(data, ({projectId}) => projectId);
     const commonTimeForProjects = findCommonTimeForProjects(projectEmployees);
+
+    const sorted = {};
     
 
     for (const key in commonTimeForProjects) {
@@ -9,19 +15,35 @@ function FinalTable({ data }) {
           
           // Check if the value is an array of objects
           if (Array.isArray(arrayOfObjects) && arrayOfObjects.every(obj => typeof obj === 'object')) {
-            console.log(`Array of objects for ${key}:`);
+           // console.log(`Array of objects for ${key}:`);
       
             // Iterate through the array of objects
             arrayOfObjects.forEach((object, index) => {
-              console.log(`  ${index + 1}: employee1 - ${object.employee1}, employee2 - ${object.employee2}, projectTime - ${object.commonTime}`);
+                const pair = `${object.employee1}_${object.employee2}`;
+                if (sorted.hasOwnProperty(pair)) {
+                    const newPair={projectId : key, timeForProject : object.commonTime};
+                    let time = object.commonTime + sorted[pair].time; 
+                   
+                    sorted[pair].proj.push(newPair);
+                    sorted[pair].time = time;
+                   
+                    
+                  } else {
+                    let time=object.commonTime;
+                    const newPair=[{projectId : key, timeForProject : object.commonTime}];
+                    const newPairTime = {proj : newPair,time : time};
+                    sorted[pair] = newPairTime;
+                  }
+              //console.log(`  ${index + 1}: employee1 - ${object.employee1}, employee2 - ${object.employee2}, projectTime - ${object.commonTime}`);
             });
           }
         }
       }
 
 
+    return sorted;
 
-
+      
     //console.log(commonTimeForProjects)
 }
 
@@ -29,7 +51,11 @@ function findCommonTimeRange(range1, range2) {
     const start = Math.max(range1.startDate, range2.startDate);
     const end = Math.min(range1.endDate || Date.now(), range2.endDate || Date.now());
 
-    return start <= end ? { startDate: start, endDate: end } : null;
+    const common = end-start;
+
+    return start<=end ? common : null;
+
+   // return start <= end ? { startDate: start, endDate: end } : null;
 }
 
 function findCommonTimeForProject(project) {
