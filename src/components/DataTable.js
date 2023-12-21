@@ -1,0 +1,35 @@
+
+
+function DataTable({data}){
+    return (
+        <div>
+            <h1>Default Statistics</h1>
+<table>
+            <thead>
+                <tr>
+                    <th>Employee Id</th>
+                    <th>Project Id</th>
+                    <th>Start Date</th>
+                    <th>Last Day</th>
+                </tr>
+            </thead>
+
+            <tbody> 
+                {data.map( (row, index) =>{
+                    return (
+                        <tr key={index}>
+                            <td>{row.employeeId}</td>
+                            <td>{row.projectId}</td>
+                            <td>{new Date(row.startDate).toDateString()}</td>
+                            <td>{row.endDate ? new Date(row.endDate).toDateString() : "Ongoing"}</td>
+                        </tr>
+                    )
+                } )}
+            </tbody>
+        </table>
+        </div>
+        
+    );
+}
+
+export default DataTable;
