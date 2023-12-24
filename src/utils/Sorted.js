@@ -1,6 +1,7 @@
 function Sorted({ data }) {
   const projectEmployees = Object.groupBy(data, ({ projectId }) => projectId);
   const commonTimeForProjects = findCommonTimeForProjects(projectEmployees);
+  console.log(commonTimeForProjects);
 
   const sorted = {};
 
@@ -67,11 +68,23 @@ function findCommonTimeForProject(project) {
           [a, b] = [b, a];
         }
 
-        commonTimePairs.push({
-          employee1: a,
-          employee2: b,
-          commonTime: commonTimeRange,
-        });
+        const existingPairIndex = commonTimePairs.findIndex(
+          (pair) =>
+            (pair.employee1 === a && pair.employee2 === b) ||
+            (pair.employee1 === b && pair.employee2 === a)
+        );
+
+        if (existingPairIndex !== -1) {
+          // Pair already exists, update the common time
+          commonTimePairs[existingPairIndex].commonTime += commonTimeRange;
+        } else {
+          // Pair doesn't exist, add a new entry
+          commonTimePairs.push({
+            employee1: a,
+            employee2: b,
+            commonTime: commonTimeRange,
+          });
+        }
       }
     }
   }
