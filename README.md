@@ -59,3 +59,4 @@ Added search and refresh functionallity explained above
 ## Date formats supported
 
 Current version of the project manages the YYYY-MM-DD and MM-DD-YYYY data formats
+In the data folder is given example CSV file **testCsv.csv** supporting the YYYY-MM-DD format and **testCsvTwo.csv** supporting the MM-DD-YYYY format
