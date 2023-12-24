@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# Pair of employees who have worked together
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Final project for Sirma Accademy
+Created by Antonia Hristova
 
-## Available Scripts
+## Concept
 
-In the project directory, you can run:
+Create an application that identifies the pair of employees who
+have worked together on common projects for the longest period
+of time and the time for each of those projects.
+There is a possibility that an employee ended working on a project but started working again on it at later phase.
+Here are listed the given buttons and their functionality:
 
-### `npm start`
+### `Select file`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Opens the computer files and lets a user to select a CSV file from their PC.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### `Check pair`
 
-### `npm test`
+Pressing this button outputs the pair which worked together the most, their total days working together and table which contains all the common projects and separate time for them.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `Search by Project ID`
 
-### `npm run build`
+This button lets user to find all entries for project by its ID. When its pressed, it pops up an input field where project ID is entered. After that it ouputs new table containing only the entries where employees worked on the desired project.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `refresh`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Refreshes the whole page
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Algorithm
 
-### `npm run eject`
+To fulfill the task we start by reading all the information and organizing it in object of arrays where the keys are the task ID and each key contains array with the two employeesand their common working time in nanoseconds. Each key contains array of the following objects:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+{
+    employee1: a,
+    employee2: b,
+    commonTime: commonTimeRange
+}
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This new object gives us to opportunity to see all the unique pairs regarding a project. After that a new object will be created - each key of the new object is a specific pair of employees turned into string and dividing them by underscore like **employee1_employee2** .
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+{
+    e1_e2 : { proj: Array[{..}], proj: commonTime}
+    ...
+}
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
 
-## Learn More
+We go through the prev object and check for each project if the pair is new and if it is we just add new key to the object containing Array with the project ID, common time spent on it and separate value for the total time spent on project. If the pair exists in the object we only add their next common project and incease the time. Finally we can find the max total time in the object and get its key and the projects connected to the key.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+##Additional features
+Added search and refresh functionallity explained above

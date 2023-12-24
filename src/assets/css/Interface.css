@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import "./assets/css/font-awesome.css";
+@import "./font-awesome.css";
 
 .App {
   font-family: "Raleway";
@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-image: url("assets/images/officeTwo.png");
+  background-image: url("../images/officeTwo.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -23,7 +23,7 @@
 .file-label {
   display: inline-block;
   padding: 10px;
-  background-color: #1488fc;
+  background-color: #808080;
   color: #fff; /* Set the text color */
   cursor: pointer;
   border-radius: 5px;
@@ -44,7 +44,7 @@
 .filter-btn,
 .check-btn,
 .refresh-btn {
-  background-color: #1488fc;
+  background-color: #808080;
   color: #fff; /* Set the text color */
   cursor: pointer;
   border-radius: 5px;

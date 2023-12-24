@@ -1,10 +1,10 @@
 import React from "react";
-import "../assets/css/Style.css";
+import "../assets/css/findWorkerPairs.css";
 import Sorted from "../utils/Sorted.js";
 
 function FinalTable(data) {
   const sorted = Sorted(data);
-
+  console.log(sorted);
   let max = 0;
 
   for (const key in sorted) {
