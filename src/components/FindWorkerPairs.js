@@ -1,101 +1,47 @@
-function Sort(commonTimeForProjects){
+import React from "react";
+import '../assets/css/Style.css';
+import Sorted from '../utils/Sorted.js'
 
-}
+function FinalTable(data){
 
-function FinalTable({ data }) {
-    const projectEmployees = Object.groupBy(data, ({projectId}) => projectId);
-    const commonTimeForProjects = findCommonTimeForProjects(projectEmployees);
+const sorted = Sorted(data);
 
-    const sorted = {};
-    
+let max=0;
 
-    for (const key in commonTimeForProjects) {
-        if (commonTimeForProjects.hasOwnProperty(key)) {
-          const arrayOfObjects = commonTimeForProjects[key];
-          
-          // Check if the value is an array of objects
-          if (Array.isArray(arrayOfObjects) && arrayOfObjects.every(obj => typeof obj === 'object')) {
-           // console.log(`Array of objects for ${key}:`);
-      
-            // Iterate through the array of objects
-            arrayOfObjects.forEach((object, index) => {
-                const pair = `${object.employee1}_${object.employee2}`;
-                if (sorted.hasOwnProperty(pair)) {
-                    const newPair={projectId : key, timeForProject : object.commonTime};
-                    let time = object.commonTime + sorted[pair].time; 
-                   
-                    sorted[pair].proj.push(newPair);
-                    sorted[pair].time = time;
-                   
-                    
-                  } else {
-                    let time=object.commonTime;
-                    const newPair=[{projectId : key, timeForProject : object.commonTime}];
-                    const newPairTime = {proj : newPair,time : time};
-                    sorted[pair] = newPairTime;
-                  }
-              //console.log(`  ${index + 1}: employee1 - ${object.employee1}, employee2 - ${object.employee2}, projectTime - ${object.commonTime}`);
-            });
-          }
-        }
+for (const key in sorted) {
+    if (sorted.hasOwnProperty(key)) {
+
+      if(max < sorted[key].time){
+        max = sorted[key].time;
+      }    
+    }
+  }
+
+  for(const key in sorted){
+    if (sorted.hasOwnProperty(key)) {
+        if(max === sorted[key].time){
+            const [id1, id2] = key.split("_");
+
+            return (
+                <div className="answer-div">
+                  <h2 >Pair with most days spent working together:</h2>
+                 <h3>Employee {id1} and employee {id2} worked as team the most!</h3>
+                  <ul className="answer">
+                    {sorted[key].proj.map((obj, index) => (
+                       <li key={index}>
+                      Project ID: {obj.projectId} - Days spent on project: {obj.timeForProject}
+                     </li>
+                    ))}
+                  </ul>
+                  <h2>Total days spent:</h2>
+                  <p>{sorted[key].time} days</p>
+                </div>
+              );
+        }    
       }
+  }
 
-
-    return sorted;
-
-      
-    //console.log(commonTimeForProjects)
 }
 
-function findCommonTimeRange(range1, range2) {
-    const start = Math.max(range1.startDate, range2.startDate);
-    const end = Math.min(range1.endDate || Date.now(), range2.endDate || Date.now());
-
-    const common = end-start;
-
-    return start<=end ? common : null;
-
-   // return start <= end ? { startDate: start, endDate: end } : null;
-}
-
-function findCommonTimeForProject(project) {
-    const commonTimePairs = [];
-
-    for (let i = 0; i < project.length - 1; i++) {
-        for (let j = i + 1; j < project.length; j++) {
-            const commonTimeRange = findCommonTimeRange(project[i], project[j]);
-
-            if (commonTimeRange !== null) {
-                commonTimePairs.push({
-                    employee1: project[i].employeeId,
-                    employee2: project[j].employeeId,
-                    commonTime: commonTimeRange
-                });
-            }
-        }
-    }
-
-    return commonTimePairs;
-}
-
-function findCommonTimeForProjects(projects) {
-    const result = {};
-
-    for (const projectId in projects) {
-        const project = projects[projectId];
-        const commonTimePairs = findCommonTimeForProject(project);
-        result[projectId] = commonTimePairs;
-    }
-
-    return result;
-}
-
-// function mostTimes(projects){
-//     const resultMatrix = {};
-
-//     for(const projectId in projects){
-//         const 
-//     }
-// }
 
 export default FinalTable;

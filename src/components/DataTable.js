@@ -1,8 +1,8 @@
-
+import '../assets/css/DataTable.css';
 
 function DataTable({data}){
     return (
-        <div>
+        <div className='FirstTable'>
             <h1>Default Statistics</h1>
 <table>
             <thead>
@@ -20,8 +20,8 @@ function DataTable({data}){
                         <tr key={index}>
                             <td>{row.employeeId}</td>
                             <td>{row.projectId}</td>
-                            <td>{new Date(row.startDate).toDateString()}</td>
-                            <td>{row.endDate ? new Date(row.endDate).toDateString() : "Ongoing"}</td>
+                            <td>{new Date(row.startDate).toLocaleDateString("bg-BG")}</td>
+                            <td>{row.endDate ? new Date(row.endDate).toLocaleDateString("bg-BG") : "Ongoing"}</td>
                         </tr>
                     )
                 } )}

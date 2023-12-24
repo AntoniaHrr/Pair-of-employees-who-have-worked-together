@@ -1,0 +1,22 @@
+.FirstTable {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.FirstTable td{
+    text-align: center;
+}
+
+.FirstTable thead tr th{
+    padding:15px;
+}
+
+h3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
