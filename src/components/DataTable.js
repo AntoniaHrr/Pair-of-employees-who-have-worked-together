@@ -23,7 +23,7 @@ function DataTable({ data }) {
                 <td>{new Date(row.startDate).toDateString()}</td>
                 <td>
                   {row.endDate
-                    ? new Date(row.endDate).toLocaleDateString("bg-BG")
+                    ? new Date(row.endDate).toDateString()
                     : "Ongoing"}
                 </td>
               </tr>
