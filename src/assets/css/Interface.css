@@ -41,7 +41,7 @@
   cursor: pointer;
 }
 
-.filter-btn,
+.search-btn,
 .check-btn,
 .refresh-btn {
   background-color: #808080;
@@ -55,7 +55,7 @@
   font-family: "Raleway";
 }
 
-.filter-btn:hover,
+.search-btn:hover,
 .check-btn:hover,
 .refresh-btn:hover {
   background-color: #2c3e50;
@@ -74,12 +74,12 @@
   border-radius: 10px;
 }
 
-.filter {
+.search {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-.filter-input {
+.search-input {
   margin-right: 20px;
 }

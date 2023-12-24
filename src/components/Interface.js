@@ -12,6 +12,7 @@ function Interface() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const [showFilterComponent, setShowFilterComponent] = useState(false);
+  const [submitClicked, setSubmitClicked] = useState(false);
 
   function handleFileUpload(e) {
     if (e.target.files.length === 0) return;
@@ -51,24 +52,32 @@ function Interface() {
   }
 
   const handleCheckButtonClick = () => {
+    setShowInput(false);
+    setShowFilterComponent(false);
+    setSubmitClicked(false);
+
     setCheckButtonClicked(true);
   };
-  const handleButtonClick = () => {
+  const handleSearchButtonClick = () => {
+    setCheckButtonClicked(false);
     setShowInput(true);
+    setSubmitClicked(false);
+  };
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+    if (submitClicked) {
+      setShowFilterComponent(true);
+    }
+  };
+
+  const handleInputSubmit = () => {
+    setShowFilterComponent(true);
+    setSubmitClicked(true);
   };
 
   const refreshPage = () => {
     window.location.reload();
-  };
-
-  const handleInputChange = (event) => {
-    // Update the input value as the user types
-    setInputValue(event.target.value);
-  };
-
-  const handleInputSubmit = () => {
-    // Activate FilterByProject component with input value
-    setShowFilterComponent(true);
   };
 
   return (
@@ -91,27 +100,30 @@ function Interface() {
             <DataTable data={data} />
 
             <div className="buttons">
+              <button className="search-btn" onClick={handleSearchButtonClick}>
+                Search by project
+              </button>
+
               <button className="check-btn" onClick={handleCheckButtonClick}>
                 Check for pair
               </button>
-              <button className="filter-btn" onClick={handleButtonClick}>
-                Filter by project
-              </button>
+
               <button className="refresh-btn" onClick={refreshPage}>
                 Refresh
               </button>
             </div>
 
             {showInput && (
-              <div className="filter">
+              <div className="search">
                 <input
-                  className="filter-input"
+                  className="search-input"
+                  placeholder="Enter project ID"
                   type="text"
                   value={inputValue}
                   onChange={handleInputChange}
                 />
-                <button className="filter-btn" onClick={handleInputSubmit}>
-                  Filter
+                <button className="search-btn" onClick={handleInputSubmit}>
+                  <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
               </div>
             )}
