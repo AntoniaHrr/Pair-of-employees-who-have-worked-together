@@ -51,5 +51,10 @@ This new object gives us to opportunity to see all the unique pairs regarding a 
 
 We go through the prev object and check for each project if the pair is new and if it is we just add new key to the object containing Array with the project ID, common time spent on it and separate value for the total time spent on project. If the pair exists in the object we only add their next common project and incease the time. Finally we can find the max total time in the object and get its key and the projects connected to the key.
 
-##Additional features
+## Additional features
+
 Added search and refresh functionallity explained above
+
+## Date formats supported
+
+Current version of the project manages the YYYY-MM-DD and MM-DD-YYYY data formats

@@ -100,12 +100,12 @@ function Interface() {
             <DataTable data={data} />
 
             <div className="buttons">
-              <button className="search-btn" onClick={handleSearchButtonClick}>
-                Search by project
-              </button>
-
               <button className="check-btn" onClick={handleCheckButtonClick}>
                 Check for pair
+              </button>
+
+              <button className="search-btn" onClick={handleSearchButtonClick}>
+                Search by project
               </button>
 
               <button className="refresh-btn" onClick={refreshPage}>
