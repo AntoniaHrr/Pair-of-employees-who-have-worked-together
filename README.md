@@ -1,6 +1,7 @@
 # Pair of employees who have worked together
 
 Final project for Sirma Accademy
+<br/>
 Created by Antonia Hristova
 
 ## Concept
